@@ -2,7 +2,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2402.01542-84cc16)](https://arxiv.org/abs/2402.01542)
 [![MIT](https://img.shields.io/badge/License-MIT-3b82f6.svg)](https://opensource.org/license/mit)
 
-This repository contains the code and input files to reproduce the results of the paper "Learning Collective Variables with Synthetic Data Augmentation through Physics-inspired Geodesic Interpolation" by [Yang et al.](https://arxiv.org/abs/2402.01542)
+This repository contains the code and input files to reproduce the results of the paper "Learning Collective Variables with Synthetic Data Augmentation through Physics-inspired Geodesic Interpolation" ([Yang et al., 2024](https://arxiv.org/abs/2402.01542)).
 
 ## Installation
 We tested the code with Python 3.10 and the packages in `requirements.txt`.
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-To deploy the learned CV in MD simulations, you need to build the PLUMED package with the pytorch and drr modules, and then build the GROMACS package with the PLUMED patch.
+To deploy the learned CV in MD simulations, you need to build the [PLUMED](https://www.plumed.org) package with the `pytorch` and `drr` modules, and then build the [GROMACS](https://www.gromacs.org) package with the PLUMED patch.
 We tested our code with PLUMED 2.9.0 with libtorch 2.0.1 and GROMACS 2023.
 
 ## Steps to reproduce the results
@@ -35,15 +35,15 @@ gmx_mpi trjconv -f nvt.xtc -pbc nojump -o trajout.xtc
 
 ### 2. Geodesic interpolation
 ```bash
-python scripts/geodesic_interpolation.py \
+python scripts/interpolate.py \
     --xtc-unfolded simulations/unbiased/unfolded/trajout.xtc \
     --xtc-folded simulations/unbiased/folded/trajout.xtc \
     --num-interp 5000 \
-    --output-dir simulations/interpolation
+    --save-path simulations/interpolation
 ```
 
-### 3. Train ML CV models
-Please refer to the notebook `train_cv.ipynb` for training the ML CV models.
+### 3. ML CV model training
+Please refer to the notebook `train_cv.ipynb` for the CV model training.
 
 ### 4. Enhanced sampling simulations
 We provide an example for a single run using the TDA CV.
@@ -64,14 +64,22 @@ gmx_mpi mdrun -deffnm nvt -nsteps 500000000 -plumed plumed.dat
 ### 5. Delta F and PMF calculation
 We also provide a single example for the case mentioned above.
 We followed the metadynamics grid range and sigma values for each CV from Table S1 in the SI.
+Note that we are printing to the `COLVAR` file every 1000 steps (2 ps), so `--skip-steps` of 50000 corresponds to 100 ns.
 ```bash
 python scripts/compute_pmf.py \
     --colvar-file simulations/enhanced/TDA/nvt_0/COLVAR \
     --cv-thresh -8.5 8.5 \
     --sigma 0.20 \
+    --skip-steps 50000 \
     --save-path simulations/enhanced/TDA/nvt_0
 ```
+This script will generate two files in the `--save-path` directory:
+- `Delta_Fs.log` contains the time (in ns) and the delta F value (in kJ/mol) at each time point.
+- `pmf.log` contains the CV grid and the PMF value (in kJ/mol) at each grid point.
 
+## Acknowledgments
+- The geodesic interpolation module is taken from the [original implementation](https://github.com/wdiepeveen/Riemannian-geometry-for-efficient-analysis-of-protein-dynamics-data/tree/main).
+- The CV models are implemented using the [mlcolvar](https://github.com/luigibonati/mlcolvar/tree/main) package.
 
 ## Citation
 ```
