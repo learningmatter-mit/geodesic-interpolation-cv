@@ -2,6 +2,7 @@ torch==2.0.1
 lightning==2.2.5
 mdtraj==1.9.9
 mlcolvar==1.1.0
+adaptive-sampling==3.0.1
 numpy==1.26.0
 matplotlib==3.8.0
 tqdm==4.66.3
