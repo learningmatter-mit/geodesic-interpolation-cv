@@ -39,7 +39,7 @@ cv_thresh = [
 
 # Time points to compute the PMF
 step_grid = np.arange(
-    args.skip_steps + args.unit_steps, total_steps + args.unit_steps, args.unit_steps
+    args.skip_steps + args.unit_steps, total_steps + 1, args.unit_steps
 )
 
 # MBAR runs
