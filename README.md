@@ -2,6 +2,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2402.01542-84cc16)](https://arxiv.org/abs/2402.01542)
 [![Zenodo](https://img.shields.io/badge/DOI-10.5281/zenodo.11863203-14b8a6.svg)](https://zenodo.org/doi/10.5281/zenodo.11863203)
 [![MIT](https://img.shields.io/badge/License-MIT-3b82f6.svg)](https://opensource.org/license/mit)
+[![plumID:24.014](https://www.plumed-nest.org/eggs/24/014/badge.svg)](https://www.plumed-nest.org/eggs/24/014)
 
 This repository contains the code and input files to reproduce the results of the paper "Learning Collective Variables with Synthetic Data Augmentation through Physics-inspired Geodesic Interpolation" ([Yang et al., 2024](https://arxiv.org/abs/2402.01542)).
 
