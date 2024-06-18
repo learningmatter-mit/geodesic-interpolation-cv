@@ -42,7 +42,7 @@ def geodesic_interpolation(
     n_frame, n_point, dim = xyz_unfolded.shape
     rng = np.random.default_rng(seed)
 
-    manifold = PointCloud(dim=dim, numpoints=n_point, base=xyz_unfolded[0], alpha=alpha)
+    manifold = PointCloud(dim=dim, numpoints=n_point, base=xyz_folded[0], alpha=alpha)
     xyz_unfolded = manifold.align_mpoint(xyz_unfolded[None]).squeeze(0)
     xyz_folded = manifold.align_mpoint(xyz_folded[None]).squeeze(0)
 

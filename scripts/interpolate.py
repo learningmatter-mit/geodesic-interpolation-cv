@@ -34,10 +34,14 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 torch.set_default_device(device)
 
 # Trajectory
-traj_unfolded = load_xtc(args.xtc_unfolded, pdb_folded=args.pdb_folded)
-traj_folded = load_xtc(args.xtc_folded, pdb_folded=args.pdb_folded)
-xyz_unfolded = torch.tensor(traj_unfolded.xyz)[:: args.traj_stride]
-xyz_folded = torch.tensor(traj_folded.xyz)[:: args.traj_stride]
+traj_unfolded = load_xtc(
+    args.xtc_unfolded, pdb_folded=args.pdb_folded, stride=args.traj_stride
+)
+traj_folded = load_xtc(
+    args.xtc_folded, pdb_folded=args.pdb_folded, stride=args.traj_stride
+)
+xyz_unfolded = torch.tensor(traj_unfolded.xyz)
+xyz_folded = torch.tensor(traj_folded.xyz)
 
 # Interpolation
 if args.interp_method == "gaussian":
