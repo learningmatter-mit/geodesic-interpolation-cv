@@ -4,7 +4,7 @@
 [![MIT](https://img.shields.io/badge/License-MIT-3b82f6.svg)](https://opensource.org/license/mit)
 [![plumID:24.014](https://www.plumed-nest.org/eggs/24/014/badge.svg)](https://www.plumed-nest.org/eggs/24/014)
 
-This repository contains the code and input files to reproduce the results of the paper "Learning Collective Variables with Synthetic Data Augmentation through Physics-inspired Geodesic Interpolation" ([Yang et al., 2024](https://arxiv.org/abs/2402.01542)).
+This repository contains the code and input files to reproduce the results of the paper "Learning Collective Variables with Synthetic Data Augmentation through Physics-inspired Geodesic Interpolation" ([Yang et al., 2024](https://pubs.acs.org/doi/10.1021/acs.jctc.4c00435)).
 
 ## Installation
 We tested the code with Python 3.10 and the packages in `requirements.txt`.
@@ -85,12 +85,14 @@ This script will generate two files in the `--save-path` directory:
 
 ## Citation
 ```
-@misc{yang2024learning,
-    title={Learning Collective Variables with Synthetic Data Augmentation through Physics-inspired Geodesic Interpolation},
+@article{yang2024learning,
+    title={Learning Collective Variables with Synthetic Data Augmentation through Physics-Inspired Geodesic Interpolation},
     author={Soojung Yang and Juno Nam and Johannes C. B. Dietschreit and Rafael G{\'o}mez-Bombarelli},
+    volume={20},
+    number={15},
+    pages={6559-6568},
     year={2024},
-    eprint={2402.01542},
-    archivePrefix={arXiv},
-    primaryClass={physics.chem-ph}
+    doi={10.1021/acs.jctc.4c00435},
+    URL={https://doi.org/10.1021/acs.jctc.4c00435}
 }
 ```
